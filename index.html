@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="midnight">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>fikra Luxury Time — Analog Clock, Timer, Stopwatch, Alarms &amp; World Clock</title>
+    <meta name="description"
+        content="fikra Luxury Time: a customizable luxury analog watch face with timer, stopwatch, multiple alarms and a world clock. Works offline and installs as an app.">
+    <meta name="theme-color" content="#000913">
+    <meta name="color-scheme" content="dark light">
+    <meta name="author" content="Fikra Digital">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="fikra Luxury Time">
+    <meta property="og:description"
+        content="A customizable luxury analog watch face with timer, stopwatch, alarms and world clock.">
+    <meta property="og:image" content="icons/icon-512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="fikra Luxury Time">
+    <meta name="twitter:description"
+        content="A customizable luxury analog watch face with timer, stopwatch, alarms and world clock.">
+    <meta name="twitter:image" content="icons/icon-512.png">
+
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <!-- Fonts load without blocking rendering; system fonts are used until they arrive -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:wght@600;700;800&amp;display=swap">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;family=Inter:wght@400;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap">
+    </noscript>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ICON SPRITE -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <symbol id="i-crown" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5L3 7zm2.6 13h12.8v2H5.6v-2z" />
+            </symbol>
+            <symbol id="i-clock" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 2" />
+                </g>
+            </symbol>
+            <symbol id="i-timer" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 2h6M12 2v3" />
+                    <circle cx="12" cy="14" r="8" />
+                    <path d="M12 10v4l2.5 1.5" />
+                </g>
+            </symbol>
+            <symbol id="i-stopwatch" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 2h4" />
+                    <path d="M12 14l3-3" />
+                    <circle cx="12" cy="14" r="8" />
+                </g>
+            </symbol>
+            <symbol id="i-alarm" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="13" r="8" />
+                    <path d="M12 9v4l2 2M5 3L2 6M19 3l3 3" />
+                </g>
+            </symbol>
+            <symbol id="i-globe" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+                </g>
+            </symbol>
+            <symbol id="i-settings" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" />
+                </g>
+            </symbol>
+            <symbol id="i-close" viewBox="0 0 24 24">
+                <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" />
+            </symbol>
+            <symbol id="i-play" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M7 4.5v15l12-7.5z" />
+            </symbol>
+            <symbol id="i-pause" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" />
+            </symbol>
+            <symbol id="i-reset" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 3-6.7" />
+                    <path d="M3 4v5h5" />
+                </g>
+            </symbol>
+            <symbol id="i-flag" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 21V4M5 4h11l-2 4 2 4H5" />
+                </g>
+            </symbol>
+            <symbol id="i-trash" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" />
+                </g>
+            </symbol>
+            <symbol id="i-edit" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" />
+                </g>
+            </symbol>
+            <symbol id="i-plus" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" />
+            </symbol>
+            <symbol id="i-bell" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0" />
+                </g>
+            </symbol>
+            <symbol id="i-sun" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <circle cx="12" cy="12" r="4" />
+                    <path
+                        d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+                </g>
+            </symbol>
+            <symbol id="i-moon" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+    <header class="topbar">
+        <a class="brand" href="#clock" aria-label="fikra Luxury Time">
+            <svg class="brand-icon" aria-hidden="true">
+                <use href="#i-crown" />
+            </svg>
+            <div>
+                <span class="brand-name" id="brandName">fikra</span>
+                <span class="brand-sub" id="brandSubtitle">LUXURY TIME</span>
+            </div>
+        </a>
+
+        <nav class="navigation" id="mainNav" data-i18n-aria="nav.label" aria-label="Main navigation">
+            <button class="nav-btn active" data-view="clock" aria-current="page"><svg aria-hidden="true">
+                    <use href="#i-clock" />
+                </svg><span data-i18n="nav.clock">Clock</span></button>
+            <button class="nav-btn" data-view="timer"><svg aria-hidden="true">
+                    <use href="#i-timer" />
+                </svg><span data-i18n="nav.timer">Timer</span></button>
+            <button class="nav-btn" data-view="stopwatch"><svg aria-hidden="true">
+                    <use href="#i-stopwatch" />
+                </svg><span data-i18n="nav.stopwatch">Stopwatch</span></button>
+            <button class="nav-btn" data-view="alarm"><svg aria-hidden="true">
+                    <use href="#i-alarm" />
+                </svg><span data-i18n="nav.alarm">Alarm</span></button>
+            <button class="nav-btn" data-view="world"><svg aria-hidden="true">
+                    <use href="#i-globe" />
+                </svg><span data-i18n="nav.world">World</span></button>
+        </nav>
+
+        <div class="top-actions">
+            <button id="langBtn" class="icon-btn lang-btn" type="button" data-i18n-aria="lang.switch"
+                aria-label="Switch language">العربية</button>
+            <button id="settingsBtn" class="icon-btn" type="button" data-i18n-aria="settings.open"
+                aria-label="Open settings" aria-haspopup="dialog" aria-expanded="false" aria-controls="customization">
+                <svg aria-hidden="true">
+                    <use href="#i-settings" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main" class="app" tabindex="-1">
+
+        <!-- ===================== CLOCK ===================== -->
+        <section class="view" id="clockView" aria-labelledby="clockTitle">
+            <h1 id="clockTitle" class="sr-only" data-i18n="nav.clock">Clock</h1>
+            <div class="clock-layout">
+                <div class="watch-column">
+                    <div class="watch" id="watch" data-bezel="gold" role="img" data-i18n-aria="watch.label"
+                        aria-label="Analog watch">
+                        <div class="watch-inner" id="watchInner" data-face="classic">
+                            <div class="watch-logo" aria-hidden="true">
+                                <svg>
+                                    <use href="#i-crown" />
+                                </svg>
+                                <strong id="faceBrand">fikra</strong>
+                                <small id="faceSubtitle">LUXURY TIME</small>
+                            </div>
+                            <div id="markers" class="markers" aria-hidden="true"></div>
+                            <div class="date-window" id="dateWindow" aria-hidden="true">09</div>
+                            <div class="hand hour-hand" id="hourHand"></div>
+                            <div class="hand minute-hand" id="minuteHand"></div>
+                            <div class="hand second-hand" id="secondHand"></div>
+                            <div class="pin"></div>
+                        </div>
+                    </div>
+                    <p class="tagline" data-i18n="tagline">TIME • STYLE • YOURS</p>
+                </div>
+
+                <div class="clock-side">
+                    <div class="digital-panel panel">
+                        <div class="digital-time" id="digitalTime" dir="ltr">--:--:--</div>
+                        <div class="digital-date" id="digitalDate">&nbsp;</div>
+                        <div class="mode-indicator" id="modeIndicator">REAL TIME</div>
+                    </div>
+
+                    <section class="panel time-control" aria-labelledby="timeControlTitle">
+                        <h2 id="timeControlTitle"><svg aria-hidden="true">
+                                <use href="#i-clock" />
+                            </svg><span data-i18n="tc.title">Customize Time</span></h2>
+
+                        <div class="segmented" role="group" data-i18n-aria="tc.mode" aria-label="Clock mode">
+                            <button type="button" class="seg selected" data-mode="real" aria-pressed="true"
+                                data-i18n="tc.real">Real Time</button>
+                            <button type="button" class="seg" data-mode="manual" aria-pressed="false"
+                                data-i18n="tc.manual">Manual</button>
+                            <button type="button" class="seg" data-mode="speed" aria-pressed="false"
+                                data-i18n="tc.speed">Speed</button>
+                        </div>
+                        <p class="muted" id="modeHint" data-i18n="tc.hint.real">Showing your device's current time.</p>
+
+                        <div id="speedControls" class="field-block hidden">
+                            <label for="timeSpeed" data-i18n="tc.speedLabel">Time Speed</label>
+                            <select id="timeSpeed">
+                                <option value="1" data-i18n="sp.1">1× (Normal)</option>
+                                <option value="2" data-i18n="sp.2">2× Faster</option>
+                                <option value="10" data-i18n="sp.10">10× Faster</option>
+                                <option value="60" data-i18n="sp.60">60× Faster</option>
+                                <option value="0.5" data-i18n="sp.05">0.5× Slower</option>
+                                <option value="0.1" data-i18n="sp.01">0.1× Slower</option>
+                            </select>
+                        </div>
+
+                        <div id="manualControls" class="field-block hidden">
+                            <label for="manualDateTime" data-i18n="tc.manualLabel">Choose date and time</label>
+                            <input type="datetime-local" id="manualDateTime" step="1">
+                            <button id="applyManualTime" class="gold-btn" type="button" data-i18n="tc.apply">Apply
+                                Custom Time</button>
+                        </div>
+
+                        <button id="resetTime" class="outline-btn full-btn" type="button">
+                            <svg aria-hidden="true">
+                                <use href="#i-reset" />
+                            </svg><span data-i18n="tc.reset">Reset to Real Time</span>
+                        </button>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== TIMER ===================== -->
+        <section class="view tool" id="timerView" hidden aria-labelledby="timerTitle">
+            <div class="panel tool-panel">
+                <h2 id="timerTitle"><svg aria-hidden="true">
+                        <use href="#i-timer" />
+                    </svg><span data-i18n="nav.timer">Timer</span></h2>
+
+                <div class="ring-wrap">
+                    <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+                        <circle class="ring-bg" cx="100" cy="100" r="90" />
+                        <circle class="ring-fg" id="timerRing" cx="100" cy="100" r="90" />
+                    </svg>
+                    <div class="ring-text">
+                        <div class="big-counter" id="timerDisplay" dir="ltr">00:10:00</div>
+                        <p id="timerStatus" class="status" role="status" aria-live="polite" data-i18n="timer.ready">
+                            Timer ready</p>
+                    </div>
+                </div>
+
+                <div class="chips" role="group" data-i18n-aria="timer.presets" aria-label="Quick presets">
+                    <button type="button" class="chip" data-preset="60">1 <span data-i18n="u.min">min</span></button>
+                    <button type="button" class="chip" data-preset="300">5 <span data-i18n="u.min">min</span></button>
+                    <button type="button" class="chip" data-preset="600">10 <span data-i18n="u.min">min</span></button>
+                    <button type="button" class="chip" data-preset="900">15 <span data-i18n="u.min">min</span></button>
+                    <button type="button" class="chip" data-preset="1800">30 <span data-i18n="u.min">min</span></button>
+                    <button type="button" class="chip" data-preset="3600">1 <span data-i18n="u.hour">hr</span></button>
+                </div>
+
+                <div class="timer-inputs">
+                    <label>
+                        <span data-i18n="u.hours">Hours</span>
+                        <input type="number" id="timerHours" min="0" max="99" value="0" inputmode="numeric">
+                    </label>
+                    <label>
+                        <span data-i18n="u.minutes">Minutes</span>
+                        <input type="number" id="timerMinutes" min="0" max="59" value="10" inputmode="numeric">
+                    </label>
+                    <label>
+                        <span data-i18n="u.seconds">Seconds</span>
+                        <input type="number" id="timerSeconds" min="0" max="59" value="0" inputmode="numeric">
+                    </label>
+                </div>
+
+                <div class="tool-buttons">
+                    <button id="startTimer" class="green-btn" type="button"><svg aria-hidden="true">
+                            <use href="#i-play" />
+                        </svg><span data-i18n="b.start">Start</span></button>
+                    <button id="pauseTimer" class="outline-btn" type="button"><svg aria-hidden="true">
+                            <use href="#i-pause" />
+                        </svg><span data-i18n="b.pause">Pause</span></button>
+                    <button id="resetTimer" class="outline-btn" type="button"><svg aria-hidden="true">
+                            <use href="#i-reset" />
+                        </svg><span data-i18n="b.reset">Reset</span></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== STOPWATCH ===================== -->
+        <section class="view tool" id="stopwatchView" hidden aria-labelledby="swTitle">
+            <div class="panel tool-panel">
+                <h2 id="swTitle"><svg aria-hidden="true">
+                        <use href="#i-stopwatch" />
+                    </svg><span data-i18n="nav.stopwatch">Stopwatch</span></h2>
+                <div class="big-counter xl" id="stopwatchDisplay" dir="ltr" role="timer" aria-live="off">00:00:00.00
+                </div>
+                <div class="tool-buttons">
+                    <button id="startStopwatch" class="green-btn" type="button"><svg aria-hidden="true">
+                            <use href="#i-play" />
+                        </svg><span data-i18n="b.start">Start</span></button>
+                    <button id="lapStopwatch" class="outline-btn" type="button"><svg aria-hidden="true">
+                            <use href="#i-flag" />
+                        </svg><span data-i18n="b.lap">Lap</span></button>
+                    <button id="resetStopwatch" class="outline-btn" type="button"><svg aria-hidden="true">
+                            <use href="#i-reset" />
+                        </svg><span data-i18n="b.reset">Reset</span></button>
+                </div>
+
+                <div id="lapsWrap" class="hidden">
+                    <h3 data-i18n="sw.laps">Laps</h3>
+                    <table class="laps-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" data-i18n="sw.lap">Lap</th>
+                                <th scope="col" data-i18n="sw.total">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lapsList"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== ALARM ===================== -->
+        <section class="view tool" id="alarmView" hidden aria-labelledby="alarmTitle">
+            <div class="alarm-layout">
+                <div class="panel tool-panel">
+                    <h2 id="alarmTitle"><svg aria-hidden="true">
+                            <use href="#i-alarm" />
+                        </svg><span id="alarmFormTitle" data-i18n="al.new">New alarm</span></h2>
+
+                    <div class="alarm-form">
+                        <label>
+                            <span data-i18n="al.time">Alarm time</span>
+                            <input type="time" id="alarmTime" value="07:00" class="time-input">
+                        </label>
+                        <label>
+                            <span data-i18n="al.label">Label (optional)</span>
+                            <input type="text" id="alarmLabel" maxlength="40" data-i18n-ph="al.labelPh"
+                                placeholder="e.g. Wake up">
+                        </label>
+
+                        <fieldset class="days-field">
+                            <legend data-i18n="al.repeat">Repeat</legend>
+                            <div class="days" id="alarmDays"></div>
+                            <p class="muted small" data-i18n="al.repeatHint">No days selected = rings once.</p>
+                        </fieldset>
+
+                        <label>
+                            <span data-i18n="al.tone">Sound</span>
+                            <div class="inline-row">
+                                <select id="alarmTone">
+                                    <option value="classic" data-i18n="tone.classic">Classic beep</option>
+                                    <option value="chime" data-i18n="tone.chime">Soft chime</option>
+                                    <option value="digital" data-i18n="tone.digital">Digital</option>
+                                </select>
+                                <button type="button" id="previewTone" class="outline-btn"
+                                    data-i18n="al.preview">Preview</button>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="tool-buttons">
+                        <button id="saveAlarm" class="blue-btn" type="button"><svg aria-hidden="true">
+                                <use href="#i-plus" />
+                            </svg><span id="saveAlarmText" data-i18n="al.add">Add alarm</span></button>
+                        <button id="cancelEdit" class="outline-btn hidden" type="button"
+                            data-i18n="b.cancel">Cancel</button>
+                    </div>
+                    <p class="muted small" data-i18n="al.note">Alarms ring while this page (or the installed app) is
+                        open.</p>
+                </div>
+
+                <div class="panel tool-panel">
+                    <h2><svg aria-hidden="true">
+                            <use href="#i-bell" />
+                        </svg><span data-i18n="al.list">Your alarms</span></h2>
+                    <p id="alarmStatus" class="status" role="status" aria-live="polite"></p>
+                    <ul id="alarmList" class="alarm-list"></ul>
+                    <p id="alarmEmpty" class="empty" data-i18n="al.empty">No alarms yet. Add your first one.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== WORLD CLOCK ===================== -->
+        <section class="view tool" id="worldView" hidden aria-labelledby="worldTitle">
+            <div class="panel tool-panel wide">
+                <h2 id="worldTitle"><svg aria-hidden="true">
+                        <use href="#i-globe" />
+                    </svg><span data-i18n="nav.world">World Clock</span></h2>
+                <div class="inline-row world-add">
+                    <label class="grow">
+                        <span class="sr-only" data-i18n="wc.add">Add a city</span>
+                        <select id="citySelect"></select>
+                    </label>
+                    <button id="addCity" class="gold-btn" type="button"><svg aria-hidden="true">
+                            <use href="#i-plus" />
+                        </svg><span data-i18n="wc.addBtn">Add city</span></button>
+                </div>
+                <ul id="worldList" class="world-list"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>
+            <span dir="ltr">© <span id="year">2026</span> <span id="footBrand">FIKRA</span></span>
+            <span class="dot" aria-hidden="true">•</span>
+            <span><span data-i18n="made">Made by</span> <strong class="maker">Fikra Digital</strong></span>
+        </p>
+    </footer>
+
+    <!-- ===================== SETTINGS DRAWER ===================== -->
+    <aside class="settings-drawer" id="customization" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"
+        inert>
+        <div class="settings-heading">
+            <h2 id="settingsTitle" data-i18n="settings.title">Settings</h2>
+            <button id="closeSettings" class="icon-btn small" type="button" data-i18n-aria="settings.close"
+                aria-label="Close settings">
+                <svg aria-hidden="true">
+                    <use href="#i-close" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="settings-body">
+            <label class="field">
+                <span data-i18n="set.logo">Logo name</span>
+                <input id="logoInput" value="fikra" maxlength="24" autocomplete="off">
+            </label>
+            <label class="field">
+                <span data-i18n="set.subtitle">Subtitle</span>
+                <input id="subtitleInput" value="LUXURY TIME" maxlength="30" autocomplete="off">
+            </label>
+
+            <div class="setting-section">
+                <h3 data-i18n="set.hand">Hand color</h3>
+                <div class="choices" id="handChoices">
+                    <button type="button" class="color-choice" data-color="#ffd166" style="--choice:#ffd166"
+                        data-i18n-aria="col.gold" aria-label="Gold"></button>
+                    <button type="button" class="color-choice" data-color="#00cfff" style="--choice:#00cfff"
+                        data-i18n-aria="col.cyan" aria-label="Cyan"></button>
+                    <button type="button" class="color-choice" data-color="#dce8f5" style="--choice:#dce8f5"
+                        data-i18n-aria="col.silver" aria-label="Silver"></button>
+                    <button type="button" class="color-choice" data-color="#ff7a90" style="--choice:#ff7a90"
+                        data-i18n-aria="col.rose" aria-label="Rose"></button>
+                    <label class="color-custom" data-i18n-aria="col.custom" title="Custom color">
+                        <input type="color" id="handCustom" value="#ffd166" data-i18n-aria="col.custom"
+                            aria-label="Custom color">
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <h3 data-i18n="set.face">Face style</h3>
+                <div class="choices three" data-group="face">
+                    <button type="button" class="option" data-face="classic" data-i18n="face.classic">Classic</button>
+                    <button type="button" class="option" data-face="minimal" data-i18n="face.minimal">Minimal</button>
+                    <button type="button" class="option" data-face="sport" data-i18n="face.sport">Sport</button>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <h3 data-i18n="set.numerals">Numerals</h3>
+                <div class="choices three" data-group="numerals">
+                    <button type="button" class="option" data-numerals="roman">XII</button>
+                    <button type="button" class="option" data-numerals="english">12</button>
+                    <button type="button" class="option" data-numerals="none" data-i18n="num.none">None</button>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <h3 data-i18n="set.bezel">Bezel</h3>
+                <div class="choices three" data-group="bezel">
+                    <button type="button" class="option" data-bezel="gold" data-i18n="bezel.gold">Gold</button>
+                    <button type="button" class="option" data-bezel="steel" data-i18n="bezel.steel">Steel</button>
+                    <button type="button" class="option" data-bezel="black" data-i18n="bezel.black">Black</button>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <h3 data-i18n="set.theme">Theme</h3>
+                <div class="choices three" data-group="theme">
+                    <button type="button" class="option" data-theme-choice="midnight"
+                        data-i18n="theme.midnight">Midnight</button>
+                    <button type="button" class="option" data-theme-choice="emerald"
+                        data-i18n="theme.emerald">Emerald</button>
+                    <button type="button" class="option" data-theme-choice="ivory"
+                        data-i18n="theme.ivory">Ivory</button>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <h3 data-i18n="set.lang">Language</h3>
+                <div class="choices three" data-group="lang">
+                    <button type="button" class="option" data-lang-choice="en">English</button>
+                    <button type="button" class="option" data-lang-choice="ar">العربية</button>
+                </div>
+            </div>
+
+            <label class="toggle-row"><span data-i18n="set.hour12">12-hour format</span>
+                <input type="checkbox" class="switch" id="hour12"></label>
+            <label class="toggle-row"><span data-i18n="set.showDate">Show date</span>
+                <input type="checkbox" class="switch" id="showDate" checked></label>
+            <label class="toggle-row"><span data-i18n="set.glow">Glow effect</span>
+                <input type="checkbox" class="switch" id="glowEffect" checked></label>
+
+            <div class="setting-section">
+                <h3 data-i18n="set.appbg">Application background</h3>
+                <input type="file" id="backgroundInput" accept="image/*" hidden>
+                <div class="btn-row">
+                    <button id="chooseBackground" class="secondary-btn" type="button" data-i18n="b.choose">Choose
+                        image</button>
+                    <button id="resetBackground" class="secondary-btn" type="button"
+                        data-i18n="b.remove">Remove</button>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <h3 data-i18n="set.watchbg">Watch face background</h3>
+                <input type="file" id="watchBackgroundInput" accept="image/*" hidden>
+                <div class="btn-row">
+                    <button id="chooseWatchBackground" class="secondary-btn" type="button" data-i18n="b.choose">Choose
+                        image</button>
+                    <button id="resetWatchBackground" class="secondary-btn" type="button"
+                        data-i18n="b.remove">Remove</button>
+                </div>
+            </div>
+
+            <p class="muted small" data-i18n="set.auto">Your changes are saved automatically on this device.</p>
+            <button id="resetDesign" class="secondary-btn full-btn" type="button"><svg aria-hidden="true">
+                    <use href="#i-reset" />
+                </svg><span data-i18n="set.resetAll">Reset to default</span></button>
+        </div>
+    </aside>
+
+    <!-- ===================== ALERT MODAL (alarm / timer) ===================== -->
+    <div class="modal" id="modal" hidden>
+        <div class="modal-card" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle"
+            aria-describedby="modalText">
+            <div class="modal-icon" aria-hidden="true"><svg>
+                    <use href="#i-bell" />
+                </svg></div>
+            <h2 id="modalTitle">Alarm</h2>
+            <p id="modalText" class="modal-time"></p>
+            <div class="modal-actions">
+                <button id="modalSnooze" class="outline-btn" type="button" data-i18n="b.snooze">Snooze 5 min</button>
+                <button id="modalStop" class="gold-btn" type="button" data-i18n="b.stop">Stop</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="settingsBackdrop" class="settings-backdrop"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
